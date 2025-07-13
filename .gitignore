@@ -1,0 +1,5 @@
+#  Ignore external packages
+vendor/
+
+# IDE
+.idea
