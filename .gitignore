@@ -3,3 +3,12 @@ vendor/
 
 # IDE
 .idea
+/example.gitignore
+
+# Folder files
+sites/default/files/
+!sites/default/files/.htaccess
+
+
+# Contrib modules
+modules/contrib/
