@@ -1,0 +1,8 @@
+name: Voting
+type: module
+description: 'A simple voting system for Drupal'
+core_version_requirement: ^11
+package: Custom
+configure: voting.settings
+dependencies:
+  - auth_api:auth_api

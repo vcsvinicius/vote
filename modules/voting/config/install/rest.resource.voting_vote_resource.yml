@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - voting
+    - auth_api
+id: voting_vote_resource
+plugin_id: 'voting_vote_resource'
+granularity: resource
+configuration:
+  methods:
+    - POST
+  formats:
+    - json
+  authentication:
+    - user_auth

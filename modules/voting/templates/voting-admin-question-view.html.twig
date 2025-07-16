@@ -1,0 +1,32 @@
+<h1>{{ question.title }}</h1>
+
+<p>{{ 'Total votes:'|t }} {{ total_votes }}</p>
+
+<table>
+  <thead>
+  <tr>
+    <th>{{ 'Option'|t }}</th>
+    <th>{{ 'Votes'|t }}</th>
+    <th>{{ 'Percentage'|t }}</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for option in question.options %}
+    <tr>
+      <td>
+        <strong>{{ option.title }}</strong>
+        {% if option.description %}
+          <br><small>{{ option.description|raw }}</small>
+        {% endif %}
+        {% if option.image %}
+          <br><img src="{{ option.image }}" alt="{{ option.title }}" style="max-width: 100px; height: auto;">
+        {% endif %}
+      </td>
+      <td>{{ option.votes }}</td>
+      <td>{{ option.percentage }}%</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<a href="{{ path('entity.voting_question.collection') }}">{{ 'Back to questions list'|t }}</a>

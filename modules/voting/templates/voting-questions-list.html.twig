@@ -1,0 +1,36 @@
+{% if questions %}
+  <h3>{{ 'Available Questions'|t }}</h3>
+  <ul class="voting-questions-list">
+    {% for question in questions %}
+      <li class="voting-question-item {% if question.voted %}voted{% endif %}">
+        <a href="{{ path('voting.view_question', {'question_id': question.id}) }}">{{ question.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>{{ 'No questions available.'|t }}</p>
+{% endif %}
+
+{% if not is_voting_enabled %}
+  <p>{{ 'Note: Voting is currently disabled.'|t }}</p>
+{% endif %}
+
+<style>
+  .voting-questions-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  .voting-question-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+  .voting-question-item:hover {
+    background-color: #f0f0f0;
+  }
+  .voting-question-item.voted a {
+    text-decoration: underline;
+    color: #666;
+  }
+</style>

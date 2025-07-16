@@ -1,0 +1,11 @@
+voting_question_add_action:
+  route_name: entity.voting_question.add_form
+  title: 'Add Voting Question'
+  appears_on:
+    - entity.voting_question.collection
+
+voting_option_add_action:
+  route_name: entity.voting_option.add_form
+  title: 'Add Voting Option'
+  appears_on:
+    - entity.voting_option.collection

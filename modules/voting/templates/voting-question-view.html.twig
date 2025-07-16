@@ -1,0 +1,105 @@
+<div class="voting-question">
+  <h1>{{ question.title }}</h1>
+  <a href="{{ path('voting.questions_list') }}" class="back-button">{{ 'Back to Questions'|t }}</a>
+
+  {% if is_voting_enabled %}
+    {% if has_voted %}
+      <p class="voted-message">{{ 'You have already voted on this question.'|t }}</p>
+      {% if question.show_vote_count %}
+        <p class="total-votes">{{ 'Total votes:'|t }} {{ total_votes }}</p>
+      {% endif %}
+    {% endif %}
+
+    <form action="{{ path('voting.submit_vote', {'question_id': question.id}) }}" method="post" id="voting-form">
+      <div class="voting-options">
+        {% for option in question.options %}
+          <div class="voting-option {% if loop.index is odd %}odd{% else %}even{% endif %} {% if has_voted and option.id == user_vote %}user-vote{% endif %}">
+            {% if not has_voted %}
+              <input type="radio" id="option-{{ option.id }}" name="option" value="{{ option.id }}">
+            {% endif %}
+            <label for="option-{{ option.id }}">
+              <div class="option-content">
+                <span class="option-title">{{ option.title }}</span>
+                <span class="option-description">{{ option.description | raw }}</span>
+              </div>
+              {% if option.image %}
+                <a href="{{ option.image }}" target="_blank" class="option-image-link">
+                  <img src="{{ option.image }}" alt="{{ option.title }}" class="option-image">
+                </a>
+              {% endif %}
+            </label>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if not has_voted %}
+        <input type="submit" value="{{ 'Vote'|t }}">
+      {% endif %}
+    </form>
+  {% else %}
+    <p>{{ 'Voting is currently disabled.'|t }}</p>
+  {% endif %}
+</div>
+
+<style>
+  .voting-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  .voting-option.odd {
+    background-color: #f9f9f9;
+  }
+  .voting-option.even {
+    background-color: #ffffff;
+  }
+  .voting-option:hover {
+    background-color: #f0f0f0;
+  }
+  .voting-option.user-vote {
+    border: 2px solid #4CAF50;
+  }
+  .option-content {
+    flex-grow: 1;
+  }
+  .option-title {
+    display: block;
+    font-weight: bold;
+  }
+  .option-description {
+    display: block;
+    color: grey;
+    font-size: 0.9em;
+  }
+  .option-image-link {
+    margin-left: 10px;
+  }
+  .option-image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+  }
+  .voted-message {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 15px;
+  }
+  .total-votes {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+</style>
+
+<script>
+  (function ($) {
+    Drupal.behaviors.votingForm = {
+      attach: function (context, settings) {
+        $('.voting-option', context).once('voting-form').on('click', function() {
+          $(this).find('input[type="radio"]').prop('checked', true);
+        });
+      }
+    };
+  })(jQuery);
+</script>

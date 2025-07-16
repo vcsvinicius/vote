@@ -75,7 +75,7 @@ parameters:
     #
     # Enabling Twig debugging is not recommended in production environments.
     # @default false
-    debug: true
+    debug: false
     # Twig auto-reload:
     #
     # Automatically recompile Twig templates whenever the source code changes.
@@ -84,7 +84,7 @@ parameters:
     #
     # Enabling auto-reload is not recommended in production environments.
     # @default null
-    auto_reload: true
+    auto_reload: null
     # Twig cache:
     #
     # By default, Twig templates will be compiled and stored in the filesystem
@@ -95,7 +95,7 @@ parameters:
     #
     # Disabling the Twig cache is not recommended in production environments.
     # @default true
-    cache: false
+    cache: true
     # File extensions:
     #
     # List of file extensions the Twig system is allowed to load via the
@@ -248,7 +248,3 @@ parameters:
     # This is not applicable when a queue is suspended but does not specify
     # how long to wait before attempting to resume.
     suspendMaximumWait: 30
-
-  services:
-    cache.backend.null:
-      class: Drupal\Core\Cache\NullBackendFactory

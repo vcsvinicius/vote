@@ -1,0 +1,7 @@
+name: Auth API
+type: module
+description: 'Provide APIs for authentication'
+core_version_requirement: ^11
+package: Custom
+dependencies:
+  - drupal:rest

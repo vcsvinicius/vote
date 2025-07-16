@@ -1,0 +1,27 @@
+voting.questions_list:
+  title: 'Voting'
+  description: 'Access voting questions'
+  route_name: voting.questions_list
+  menu_name: main
+  weight: 5
+
+voting.settings:
+  title: 'Voting Settings'
+  description: 'Configure the voting system'
+  parent: system.admin_config_system
+  route_name: voting.settings
+  weight: 10
+
+entity.voting_question.collection:
+  title: 'Voting Questions'
+  route_name: entity.voting_question.collection
+  description: 'List Voting Questions'
+  parent: system.admin_structure
+  weight: 99
+
+entity.voting_option.collection:
+  title: 'Voting Options'
+  route_name: entity.voting_option.collection
+  description: 'List Voting Options'
+  parent: system.admin_structure
+  weight: 100

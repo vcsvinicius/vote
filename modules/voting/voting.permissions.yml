@@ -1,0 +1,7 @@
+administer voting:
+  title: 'Administer voting'
+  description: 'Manage voting questions and answers'
+
+vote in polls:
+  title: 'Vote in polls'
+  description: 'Allow users to vote in polls'

@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Provides a voting entity type.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function voting_theme() {
+  return [
+    'voting_questions_list' => [
+      'variables' => [
+        'questions' => [],
+        'is_voting_enabled' => FALSE,
+      ],
+    ],
+    'voting_question_view' => [
+      'variables' => [
+        'question' => [],
+        'is_voting_enabled' => FALSE,
+        'has_voted' => FALSE,
+        'user_vote' => NULL,
+        'total_votes' => 0,
+      ],
+    ],
+    'voting_admin_question_view' => [
+      'variables' => [
+        'question' => NULL,
+        'total_votes' => NULL,
+      ],
+    ],
+  ];
+}

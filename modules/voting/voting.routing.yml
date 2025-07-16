@@ -1,0 +1,111 @@
+voting.settings:
+  path: '/admin/config/voting/settings'
+  defaults:
+    _form: '\Drupal\voting\Form\VotingSettingsForm'
+    _title: 'Voting Settings'
+  requirements:
+    _permission: 'administer voting'
+
+entity.voting_question.collection:
+  path: '/admin/structure/voting_question'
+  defaults:
+    _entity_list: 'voting_question'
+    _title: 'Voting Questions'
+  requirements:
+    _permission: 'administer voting'
+
+entity.voting_question.add_form:
+  path: '/admin/structure/voting_question/add'
+  defaults:
+    _entity_form: 'voting_question.add'
+    _title: 'Add Voting Question'
+  requirements:
+    _permission: 'administer voting'
+
+entity.voting_question.edit_form:
+  path: '/admin/structure/voting_question/{voting_question}/edit'
+  defaults:
+    _entity_form: 'voting_question.edit'
+    _title: 'Edit Voting Question'
+  requirements:
+    _permission: 'administer voting'
+
+entity.voting_question.delete_form:
+  path: '/admin/structure/voting_question/{voting_question}/delete'
+  defaults:
+    _entity_form: 'voting_question.delete'
+    _title: 'Delete Voting Question'
+  requirements:
+    _permission: 'administer voting'
+
+entity.voting_option.collection:
+  path: '/admin/structure/voting_option'
+  defaults:
+    _entity_list: 'voting_option'
+    _title: 'Voting Options'
+  requirements:
+    _permission: 'administer voting'
+
+entity.voting_option.add_form:
+  path: '/admin/structure/voting_option/add'
+  defaults:
+    _entity_form: 'voting_option.add'
+    _title: 'Add Voting Option'
+  requirements:
+    _permission: 'administer voting'
+
+entity.voting_option.edit_form:
+  path: '/admin/structure/voting_option/{voting_option}/edit'
+  defaults:
+    _entity_form: 'voting_option.edit'
+    _title: 'Edit Voting Option'
+  requirements:
+    _permission: 'administer voting'
+
+entity.voting_option.delete_form:
+  path: '/admin/structure/voting_option/{voting_option}/delete'
+  defaults:
+    _entity_form: 'voting_option.delete'
+    _title: 'Delete Voting Option'
+  requirements:
+    _permission: 'administer voting'
+
+entity.voting_option.canonical:
+  path: '/admin/structure/voting_option/{voting_option}'
+  defaults:
+    _entity_view: 'voting_option'
+    _title: 'Voting Option'
+  requirements:
+    _permission: 'administer voting'
+
+voting.questions_list:
+  path: '/voting/questions'
+  defaults:
+    _controller: '\Drupal\voting\Controller\VotingController::listQuestions'
+    _title: 'Voting Questions'
+  requirements:
+    _permission: 'vote in polls'
+
+voting.view_question:
+  path: '/voting/question/{question_id}'
+  defaults:
+    _controller: '\Drupal\voting\Controller\VotingController::viewQuestion'
+    _title: 'View Question'
+  requirements:
+    _permission: 'vote in polls'
+
+voting.submit_vote:
+  path: '/voting/submit/{question_id}'
+  defaults:
+    _controller: '\Drupal\voting\Controller\VotingController::submitVote'
+  requirements:
+    _permission: 'vote in polls'
+    question_id: \d+
+
+voting.admin_question_view:
+  path: '/admin/structure/voting/question/{question_id}/view'
+  defaults:
+    _controller: '\Drupal\voting\Controller\VotingAdminController::adminViewQuestion'
+    _title: 'View Question Results'
+  requirements:
+    _permission: 'administer voting'

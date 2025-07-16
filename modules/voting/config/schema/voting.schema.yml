@@ -1,0 +1,7 @@
+voting.settings:
+  type: config_object
+  label: 'Voting settings'
+  mapping:
+    enabled:
+      type: boolean
+      label: 'Enable Voting System'

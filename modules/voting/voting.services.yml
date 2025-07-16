@@ -1,0 +1,16 @@
+services:
+  voting.voting_service:
+    class: Drupal\voting\VotingService
+    arguments: ['@entity_type.manager', '@current_user']
+
+  voting.question_resource:
+    class: Drupal\voting\Plugin\rest\resource\QuestionResource
+    arguments: ['@entity_type.manager', '@current_user']
+    tags:
+      - { name: rest_resource }
+
+  voting.vote_resource:
+    class: Drupal\voting\Plugin\rest\resource\VoteResource
+    arguments: ['@entity_type.manager', '@current_user']
+    tags:
+      - { name: rest_resource }
