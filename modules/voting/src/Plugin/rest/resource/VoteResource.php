@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
   id: "voting_vote_resource",
   label: new TranslatableMarkup("Voting Vote Resource"),
   uri_paths: [
-    "canonical" => "/api/voting/vote",
+    "create" => "/api/voting/vote",
   ]
 )]
 class VoteResource extends ResourceBase {
