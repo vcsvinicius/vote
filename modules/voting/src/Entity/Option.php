@@ -36,7 +36,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
     "delete-form" => "/admin/structure/voting_option/{voting_option}/delete",
     "collection" => "/admin/structure/voting_option",
   ],
-  admin_permission: 'administer voting answers',
+  admin_permission: 'administer voting',
   base_table: 'voting_option'
 )]
 class Option extends ContentEntityBase {

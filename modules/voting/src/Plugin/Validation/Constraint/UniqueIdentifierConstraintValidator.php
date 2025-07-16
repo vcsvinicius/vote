@@ -46,11 +46,16 @@ class UniqueIdentifierConstraintValidator extends ConstraintValidator implements
       return;
     }
 
+    // Transform the identifier to lowercase and replace spaces per underscores.
+    $identifier = current($value->getValue())['value'];
+    $identifier = strtolower($identifier);
+    $identifier = str_replace(' ', '_', $identifier);
+
     $query = $this->entityTypeManager
       ->getStorage('voting_question')
       ->getQuery()
       ->accessCheck(FALSE)
-      ->condition('identifier', current($value->getValue())['value'])
+      ->condition('identifier', $identifier)
       ->range(0, 1);
 
     $entity = $this->context->getObject()->getEntity();
@@ -61,7 +66,9 @@ class UniqueIdentifierConstraintValidator extends ConstraintValidator implements
     $result = $query->execute();
 
     if (!empty($result)) {
-      $this->context->addViolation($constraint->message, ['%value' => $value]);
+      $this->context->addViolation($constraint->message, [
+        '%value' => current($value->getValue())['value'],
+      ]);
     }
   }
 

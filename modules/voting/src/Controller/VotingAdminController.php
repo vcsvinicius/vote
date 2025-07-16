@@ -53,13 +53,17 @@ class VotingAdminController extends ControllerBase {
 
     assert($question instanceof Question);
     $options = $question->getOptions();
+
+    // Calculate total votes.
     $total_votes = 0;
-    $formatted_options = [];
+    foreach ($options as $option) {
+      $total_votes += $option->getVoteCount();
+    }
 
     // Format options and calculate vote counts.
+    $formatted_options = [];
     foreach ($options as $option) {
       $vote_count = $option->getVoteCount();
-      $total_votes += $vote_count;
 
       $formatted_options[] = [
         'id' => $option->id(),

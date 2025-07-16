@@ -36,7 +36,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
     "delete-form" => "/admin/structure/voting_question/{voting_question}/delete",
     "collection" => "/admin/structure/voting_question",
   ],
-  admin_permission: 'administer voting questions',
+  admin_permission: 'administer voting',
   base_table: 'voting_question'
 )]
 class Question extends ContentEntityBase {

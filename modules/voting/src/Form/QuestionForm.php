@@ -20,7 +20,7 @@ class QuestionForm extends ContentEntityForm {
 
     // Disable the identifier field if this is an existing entity.
     if (!$entity->isNew()) {
-      $form['identifier']['widget'][0]['value']['#disabled'] = TRUE;
+      $form['identifier']['widget'][0]['value']['#attributes']['readonly'] = 'readonly';
       $form['identifier']['widget'][0]['value']['#description'] = $this->t('The identifier cannot be changed after creation.');
     }
     else {
@@ -40,7 +40,13 @@ class QuestionForm extends ContentEntityForm {
 
     // If this is an existing entity, ensure the identifier hasn't been changed.
     if (!$entity->isNew()) {
-      if ($entity->get('identifier')->value !== current($form_state->getValue('identifier'))['value']) {
+      $original_entity = $this->entityTypeManager
+        ->getStorage('voting_question')
+        ->loadUnchanged($entity->id());
+      $original_identifier = $original_entity->get('identifier')->value;
+      $new_identifier = $form_state->getValue('identifier')[0]['value'];
+
+      if ($original_identifier !== $new_identifier) {
         $form_state->setErrorByName('identifier', $this->t('The identifier cannot be changed after creation.'));
       }
     }

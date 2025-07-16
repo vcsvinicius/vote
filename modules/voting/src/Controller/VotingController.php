@@ -3,6 +3,7 @@
 namespace Drupal\voting\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Routing\UrlGeneratorInterface;
 use Drupal\voting\Entity\Question;
 use Drupal\voting\VotingService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -26,12 +27,15 @@ class VotingController extends ControllerBase {
    *   Config factory.
    * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
    *   Request stack.
+   * @param \Drupal\Core\Routing\UrlGeneratorInterface $urlGenerator
+   *   URL generator.
    */
   public function __construct(
     protected $entityTypeManager,
     protected VotingService $votingService,
     protected $configFactory,
     protected RequestStack $requestStack,
+    protected UrlGeneratorInterface $urlGenerator,
   ) {}
 
   /**
@@ -42,7 +46,8 @@ class VotingController extends ControllerBase {
       $container->get('entity_type.manager'),
       $container->get('voting.voting_service'),
       $container->get('config.factory'),
-      $container->get('request_stack')
+      $container->get('request_stack'),
+      $container->get('url_generator')
     );
   }
 
@@ -221,6 +226,26 @@ class VotingController extends ControllerBase {
   private function isVotingEnabled(): bool {
     $config = $this->configFactory->get('voting.settings');
     return $config->get('enabled') ?: FALSE;
+  }
+
+  /**
+   * Redirect to a specific route.
+   *
+   * @param $route_name
+   *   Name of the route.
+   * @param array $route_parameters
+   *   Parameters for the route.
+   * @param array $options
+   *   Options for the redirect.
+   * @param $status
+   *   HTTP status code for the redirect.
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
+   *   Redirect response.
+   */
+  protected function redirect($route_name, array $route_parameters = [], array $options = [], $status = 302): RedirectResponse {
+    $url = $this->urlGenerator->generateFromRoute($route_name, $route_parameters, $options);
+    return new RedirectResponse($url);
   }
 
 }

@@ -1,0 +1,19 @@
+<phpunit bootstrap="core/tests/bootstrap.php"
+         colors="true"
+         stopOnFailure="false">
+  <testsuites>
+    <testsuite name="Project Test Suite">
+      <directory>modules/voting/tests/src/Kernel</directory>
+      <directory>modules/voting/tests/src/Unit</directory>
+      <directory>modules/voting/tests/src/Functional</directory>
+    </testsuite>
+  </testsuites>
+
+  <php>
+    <ini name="error_reporting" value="-1"/>
+    <ini name="display_errors" value="1"/>
+    <ini name="display_startup_errors" value="1"/>
+    <server name="SIMPLETEST_BASE_URL" value="http://vote.lndo.site"/>
+    <server name="BROWSERTEST_OUTPUT_DIRECTORY" value="/tmp"/>
+  </php>
+</phpunit>
